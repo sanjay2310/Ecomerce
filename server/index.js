@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRouter= require("./routes/auth");
+const adminRouter = require("./routes/admin");
 
 // set the port number to 3000
 const PORT = 3000;
@@ -15,6 +16,7 @@ const db = 'mongodb+srv://sanjayrana070:evWRW7djoeOqlTBM@cluster0.cswkwrl.mongod
 // use the authRouter middleware for all routes
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
 
 //Connection
 mongoose.connect(db).then(function() {

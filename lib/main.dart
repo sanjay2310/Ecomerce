@@ -1,5 +1,6 @@
 import 'package:amazone_app1/comman/widgets/bottom_bar.dart';
 import 'package:amazone_app1/constant/global_variable.dart';
+import 'package:amazone_app1/features/admin/screens/admin_screen.dart';
 import 'package:amazone_app1/features/auth/screens/auth_screen.dart';
 import 'package:amazone_app1/features/auth/services/auth_user.dart';
 import 'package:amazone_app1/provider/user_provider.dart';
@@ -47,11 +48,13 @@ class _MyAppState extends State<MyApp> {
               color: Colors.black,
             ),
           ),
-          useMaterial3: true, // can remove this line
+          // can remove this line
         ),
         onGenerateRoute: (settings) => generateRoute(settings),
         home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-            ? const BottomBar()
+            ? Provider.of<UserProvider>(context).user.type == 'user'
+                ? const BottomBar()
+                : const AdminScreen()
             : const AuthScreen());
   }
 }

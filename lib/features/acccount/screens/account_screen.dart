@@ -1,4 +1,7 @@
 import 'package:amazone_app1/constant/global_variable.dart';
+import 'package:amazone_app1/features/acccount/widgets/below_appbar.dart';
+import 'package:amazone_app1/features/acccount/widgets/orders.dart';
+import 'package:amazone_app1/features/acccount/widgets/top_buttons.dart';
 import 'package:flutter/material.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -13,7 +16,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(
             decoration:
@@ -44,6 +47,19 @@ class _AccountScreenState extends State<AccountScreen> {
             ],
           ),
         ),
+      ),
+      body: Column(
+        children: const [
+          BelowAppBar(),
+          SizedBox(
+            height: 10,
+          ),
+          TopButton(),
+          SizedBox(
+            height: 10,
+          ),
+          Orders()
+        ],
       ),
     );
   }
