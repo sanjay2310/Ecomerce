@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: const [
             AddressBox(),
             SizedBox(height: 10),
-            TopCategory(),
+            TopCategories(),
             SizedBox(height: 10),
             CarouselImage(),
              DealOfDay(),

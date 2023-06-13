@@ -1,8 +1,10 @@
 // import the express module and the authRouter from the ./routes/auth file
 const express = require("express");
 const mongoose = require("mongoose");
-const authRouter= require("./routes/auth");
 const adminRouter = require("./routes/admin");
+// IMPORTS FROM OTHER FILES
+const authRouter = require("./routes/auth");
+const productRouter = require("./routes/product");
 
 // set the port number to 3000
 const PORT = 3000;
@@ -17,6 +19,7 @@ const db = 'mongodb+srv://sanjayrana070:evWRW7djoeOqlTBM@cluster0.cswkwrl.mongod
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 
 //Connection
 mongoose.connect(db).then(function() {

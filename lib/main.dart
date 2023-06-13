@@ -16,45 +16,40 @@ void main() {
   ], child: const MyApp()));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final AuthService authService = AuthService();
-
-  @override
-  void initState() {
-    super.initState();
-    authService.getUserData(context);
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Amazon Clone',
-        theme: ThemeData(
-          scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-          colorScheme: const ColorScheme.light(
-            primary: GlobalVariables.secondaryColor,
-          ),
-          appBarTheme: const AppBarTheme(
-            elevation: 0,
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-          ),
-          // can remove this line
+      debugShowCheckedModeBanner: false,
+      title: 'Amazon Clone',
+      theme: ThemeData(
+        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+        colorScheme: const ColorScheme.light(
+          primary: GlobalVariables.secondaryColor,
         ),
-        onGenerateRoute: (settings) => generateRoute(settings),
-        home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-            ? Provider.of<UserProvider>(context).user.type == 'user'
-                ? const BottomBar()
-                : const AdminScreen()
-            : const AuthScreen());
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+        ),
+      ),
+      onGenerateRoute: (settings) => generateRoute(settings),
+      home: Consumer<UserProvider>(
+        builder: (context, userProvider, _) {
+          if (userProvider.user.token.isNotEmpty) {
+            if (userProvider.user.type == 'user') {
+              return const BottomBar();
+            } else {
+              return const AdminScreen();
+            }
+          } else {
+            return const AuthScreen();
+          }
+        },
+      ),
+    );
   }
 }
